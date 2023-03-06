@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+    قائمة المنشورات
+{% endblock %}
+{% block content %}
+    <ul>
+    {% if posts %}
+        <h1>المنشورات</h1>
+                {% for post in posts %}
+                    <div class="card pt-2 mb-4">
+                      <div class="card-body">
+                        <h5 class="card-title"> عنوان المقالة: {{ post.title }}</h5>
+                        <a href="/posts/{{ post.id }}" class="btn btn-primary mt-4">الذهاب الي المقالة </a>
+                      </div>
+                    </div>
+        {% endfor %}
+    </ul>
+        <a href="/posts/create" class="btn btn-primary">اضافة منشور جديد</a>
+
+    {% else %}
+        <h1>لا توجد منشورات لعرضها</h1>
+
+    {% endif %}
+
+
+
+{% endblock %}
+

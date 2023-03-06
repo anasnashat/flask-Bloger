@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+
+      <div class="mb-3">
+        <label for="username" class="form-label">اسم المستخدم</label>
+        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">البريد الإلكتروني </label>
+        <input type="email" class="form-control" id="email"  name="email" aria-describedby="emailHelp">
+      </div>
+      <div class="mb-3">
+        <label for="name" class="form-label">الاسم بالكامل</label>
+        <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">كلمه السر </label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">أعادة إدخال كلمه السر </label>
+        <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}

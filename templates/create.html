@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} إنشاء مقاله {% endblock %}
+{% block content %}
+    <form method="post" action="/posts/create" >
+    <div class="mb-3">
+      <label for="title" class="form-label">عنوان المقالة </label>
+      <input type="text" class="form-control" id="title" name="title" >
+    </div>
+    <div class="mb-3">
+      <label for="body" class="form-label">محتوي المقالة </label>
+      <textarea class="form-control" id="body" name="body" rows="10" placeholder="اكتب محتوي المقالة هنا "></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">إنشاء</button>
+
+    </form>
+{% endblock %}
