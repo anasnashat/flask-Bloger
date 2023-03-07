@@ -108,6 +108,20 @@ def login():
     return render_template('auth/login.html')
 
 
+@app.before_request
+def load_logged_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        connection = get_db()
+        g.user = connection.execute('SELECT * FROM users WHERE id=?', (user_id,)).fetchone()
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run()
