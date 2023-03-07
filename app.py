@@ -1,3 +1,4 @@
+import functools
 from flask import Flask, request, redirect, url_for, render_template, flash, session, g
 import sqlite3
 
@@ -13,6 +14,17 @@ def get_db():
     db = sqlite3.connect(DATABASE)
     db.row_factory = sqlite3.Row
     return db
+
+
+def login_required(func):
+    @functools.wraps(func)
+    def warps_func(**kwargs):
+        print(g.user)
+        if g.user is None:
+            return redirect(url_for('login'))
+        return func(**kwargs)
+
+    return warps_func
 
 
 @app.route('/posts/')
@@ -33,6 +45,7 @@ def show_post(post_id):
 
 
 @app.route('/posts/create', methods=['GET', 'POST'])
+@login_required
 def create_post():
     if request.method == "POST":
         connection = get_db()
@@ -104,7 +117,8 @@ def login():
             return redirect(url_for('index'))
 
         flash(error)
-
+    if g.user:
+        return redirect(url_for('index'))
     return render_template('auth/login.html')
 
 
@@ -122,6 +136,7 @@ def load_logged_user():
 def logout():
     session.clear()
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run()
