@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}إنشاء حساب جديد{% endblock %}
 
 {% block content %}
+    <div class="col-md-5">
     <form action="" method="post">
-
       <div class="mb-3">
         <label for="username" class="form-label">اسم المستخدم</label>
         <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
@@ -19,15 +19,19 @@
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">كلمه السر </label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="password" class="form-label">كلمه السر </label>
+        <input type="password" class="form-control" id="password" name="password">
       </div>
 
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">أعادة إدخال كلمه السر </label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label for="password2" class="form-label">أعادة إدخال كلمه السر </label>
+        <input type="password" class="form-control" id="password2" name="password2">
       </div>
 
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+      <button type="submit" class="btn btn-primary">إنشاء حساب</button>
+    </form></div>
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">{{ message }}</div>
+    {% endfor %}
 {% endblock %}
