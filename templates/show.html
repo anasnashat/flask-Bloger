@@ -9,5 +9,19 @@
         {{ post.body }}
     </p>
 
-    <a href="/posts/"> All Posts </a>
+    <div class="row row-cols-auto">
+    <div class="col">
+    <a href="/posts/" class="btn btn-primary"> All Posts </a>
+    </div>
+        {% if g.user.id == post['author_id'] %}
+            <div class="col">
+                    <a href="{{url_for('bp.update_post', post_id=post['id'])}}"  class="btn btn-primary" > Edite Posts </a>
+                </div>
+            <div class="col">
+                <form action="{{url_for('bp.delete_post', post_id=post['id'])}}" method="POST">
+                    <button type="submit" class="btn bg-danger"> Delete</button>
+                </form>
+            </div>
+        {% endif %}
+    </div>
 {% endblock %}
