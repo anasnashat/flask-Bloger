@@ -86,6 +86,28 @@ def register():
         return render_template('auth/register.html')
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        error = None
+        connection = get_db()
+        user = connection.execute("SELECT * FROM users WHERE email=?", (email,)).fetchone()
+        if not user:
+            error = 'البريد الإلكتروني غير موجود برجاء التسجيل أولا '
+        elif not check_password_hash(user['password'], password):
+            error = 'كلمه المرور او البريد الإلكتروني غير صحيح '
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('index'))
+
+        flash(error)
+
+    return render_template('auth/login.html')
+
+
 
 if __name__ == '__main__':
     app.run()
