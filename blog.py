@@ -66,6 +66,9 @@ def create_post():
     return render_template('create.html')
 
 
+
+
+
 @bp.route("/<int:post_id>/update", methods=["GET", "POST"])
 def update_post(post_id):
     post = get_post(post_id)
